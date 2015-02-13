@@ -6,9 +6,7 @@ import io.dropwizard.setup.Environment;
 import it.siletto.ms.auth.CredentialsAuthenticator;
 import it.siletto.ms.auth.RestrictedToProvider;
 import it.siletto.ms.auth.User;
-import it.siletto.ms.auth.service.AuthDAO;
 import it.siletto.ms.auth.service.CypherService;
-import it.siletto.ms.auth.service.impl.AuthDAOStaticImpl;
 import it.siletto.ms.auth.service.impl.CypherServiceRSAImpl;
 import it.siletto.ms.base.cors.CorsFilterFactory;
 import it.siletto.ms.base.health.BasicHealthCheck;
@@ -46,12 +44,12 @@ public class HelloServiceApp extends Application<AppConfiguration> {
         Injector injector = Guice.createInjector(new Module(){
         	@Override
         	public void configure(Binder binder) {
-        		binder.bind(AuthDAO.class).to(AuthDAOStaticImpl.class);
         		binder.bind(CypherService.class).to(CypherServiceRSAImpl.class);
         	}
         });
         
-        CredentialsAuthenticator authenticator = new CredentialsAuthenticator(appConfiguration.getPrivateKeyFile());
+        CredentialsAuthenticator authenticator = injector.getInstance(CredentialsAuthenticator.class);
+        authenticator.setPrivateKeyFile(appConfiguration.getPrivateKeyFile());
 
         environment.jersey().register(injector.getInstance(Hello.class));
 
