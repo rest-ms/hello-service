@@ -3,7 +3,7 @@ package it.siletto.ms.hello.test;
 import static org.fest.assertions.api.Assertions.assertThat;
 import io.dropwizard.testing.junit.DropwizardAppRule;
 import it.siletto.ms.hello.AppConfiguration;
-import it.siletto.ms.hello.AuthServiceApp;
+import it.siletto.ms.hello.HelloServiceApp;
 
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -15,7 +15,7 @@ import com.sun.jersey.api.client.WebResource;
 public class TestHello {
 
 	@ClassRule
-    public static final DropwizardAppRule<AppConfiguration> RULE = new DropwizardAppRule<AppConfiguration>(AuthServiceApp.class, "app.yml");
+    public static final DropwizardAppRule<AppConfiguration> RULE = new DropwizardAppRule<AppConfiguration>(HelloServiceApp.class, "app.yml");
 	
 	@Test
 	public void testHello() throws Exception {

@@ -19,7 +19,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 
-public class AuthServiceApp extends Application<AppConfiguration> {
+public class HelloServiceApp extends Application<AppConfiguration> {
     private static AppConfiguration cfg;
 
     public static AppConfiguration getConfig() {
@@ -27,10 +27,10 @@ public class AuthServiceApp extends Application<AppConfiguration> {
     }
 
     public static void main(String[] args) throws Exception {
-        new AuthServiceApp().run(args);
+        new HelloServiceApp().run(args);
     }
 
-    public AuthServiceApp() {
+    public HelloServiceApp() {
 
     }
 
